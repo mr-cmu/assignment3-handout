@@ -11,7 +11,7 @@ be used by a quadrotor.
 Download the assignment.
 
 ```
-git clone git@github.com:mral-cmu/assignment3-handout.git
+git clone git@github.com:mr-cmu/assignment3-handout.git
 cd assignment3-handout
 git lfs install
 git lfs pull
@@ -25,7 +25,7 @@ instructions
 If the cloning still does not work, use
 
 ```
-git clone https://github.com/mral-cmu/assignment3-handout.git
+git clone https://github.com/mr-cmu/assignment3-handout.git
 ```
 
 Copy the `quadrotor_control`, `quadrotor_model`, and `utils`
