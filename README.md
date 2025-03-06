@@ -6,6 +6,7 @@ be used by a quadrotor.
 ### Academic Integrity
 1. Do not publicly share your solution (using GitHub or otherwise)
 2. Collaboration is encouraged but you should write final code on your own.
+3. No AI tools may be used to complete this assignment. This includes but is not limited to Copilot, ChatGPT, Perplexity AI, and Cursor AI.
 
 ## 0. Setup
 Download the assignment.
