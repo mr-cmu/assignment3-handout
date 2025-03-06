@@ -35,6 +35,57 @@ class ForwardArcTrajectory:
         self.coeffs = coeffs_world_frame
         self.initialized = True
 
+    def integrate_coefficients(self, cin):
+        """ This function is an optional helper function you can call within 
+            the __init__ function. It integrates the coefficients passed.
+            Coefficients are in the form of c0 + c1*t + c2*t*t + ... + c7*t^7.
+        
+        Args:
+            cin: 4x8 matrix of coefficients for x, y, z, yaw
+       
+        Output:
+            cout: 4x9 matrix of coefficients where the entry in
+                  s[0,:] consists of a zero.
+        """
+        cout = np.zeros((4,9))
+        return cout
+
+    def calculate_coefficients_from_contraints(self, s, f):
+        """ This function is an optional helper function you can call within 
+            the __init__ function. Given a initial constraints and final constraints,
+            this function calculates the coefficients for the forward arc motion
+            primitives. This function calls the optional get_coefficients function.
+            Coefficients are in the form of c0 + c1*t + c2*t*t + ... + c7*t^7.
+            Constraints are passed in in the body frame.
+        
+        Args:
+            s: initial constraints State() class instance
+            f: final constraints State() class instance
+       
+        Output:
+            coeffs: 4x8 matrix of coefficients in the body frame
+        """
+
+        # Return body frame coefficients
+        coeffs = np.zeros((4,8))
+        return coeffs
+
+    def get_coefficients(self, b):
+        """ This function is an optional helper function you can call within 
+            the calculate_coefficients_from_contraints function. 
+            Given the endpoints constraints in vector form (b), this function
+            will calculate the solution to Ax=b we discussed in the Quadrotor Planning
+            II lecture for forward arc motion primitives. 
+        
+        Args:
+            b: 8x1 np array of endpoint constraints
+       
+        Output:
+            x: 8x1 nparray of coefficients
+        """
+        x = np.zeros((8,1))
+        return x
+
     def get_ref(self, t):
         """ Returns reference as State() for a multi-axis trajectory.
             The multi-axis trajectory contains single axis trajectories
