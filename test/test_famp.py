@@ -40,7 +40,7 @@ def test_get_coefficients():
     cmd = np.zeros((3,1))
     T = 2
     famp = ForwardArcTrajectory(curr_ref, cmd, T)
-    x = famp.get_coefficients(coeffs)
+    x = famp.get_coefficients(b)
     assert(np.max(abs((x - correctx))) < 1e-01)
 
 
