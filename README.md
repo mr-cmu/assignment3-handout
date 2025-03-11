@@ -149,3 +149,26 @@ tar -cvf handin.tar quadrotor_simulator_py
 Autolab will run tests on each function you implement and you will
 receive a score out of 100.  You may upload as many times as you like.
 Note that we may regrade submissions after the deadline passes.
+
+## Troubleshooting
+
+If you see an error like this:
+
+```
+_pickle.UnpicklingError: invalid load key, 'v'
+```
+
+the issue is likely caused because you don't have `git lfs` installed
+or it hasn't pulled the file to your machine. To fix it, you can
+run the following:
+
+```
+cd assignment3-handout
+git lfs install
+git lfs pull
+```
+
+You can verify that it pulled properly if you cat the output of
+the file `data/flat_space_traj1.pkl` and see a large binary dump.
+If you see three lines containing a hash instead, please talk
+to the course staff so we can help you troubleshoot.
