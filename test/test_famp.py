@@ -7,7 +7,9 @@ import math
 import matplotlib.pyplot as plt
 import pickle
 
-sys.path.append('../')
+import os
+qs_path = os.path.dirname(os.path.abspath(__file__))+'/..'
+sys.path.append(qs_path)
 
 from check_states import check_states
 from quadrotor_simulator_py.quadrotor_control.state import State
@@ -126,7 +128,7 @@ def test_calculate_coefficients_from_constraints():
     assert(np.max(abs((coeffs - correct_coeffs))) < 1e-01)
 
 def test_forwardarcprimitives():
-    with open('../data/famp_states.pkl', 'rb') as file:
+    with open(qs_path+'/data/famp_states.pkl', 'rb') as file:
         correct = pickle.load(file)
 
     curr_ref = correct['curr_ref']

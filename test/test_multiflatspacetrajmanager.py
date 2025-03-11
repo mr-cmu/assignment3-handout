@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 import pickle
 from sklearn.metrics import mean_squared_error
 
-sys.path.append('../')
+import os
+qs_path = os.path.dirname(os.path.abspath(__file__))+'/..'
+sys.path.append(qs_path)
 
 from plot_states import plot
 from check_states import check_states
@@ -70,7 +72,7 @@ def test1_multi_flat_space_traj_manager():
     times = np.linspace(0, 5*T, 5*100*T)
     states = []
 
-    with open('../data/multi_flat_space_traj1.pkl', 'rb') as file:
+    with open(qs_path+'/data/multi_flat_space_traj1.pkl', 'rb') as file:
         correct = pickle.load(file)
 
     for idx in range(0, len(times)):
@@ -119,7 +121,7 @@ def test2_multi_flat_space_traj_manager():
     times = np.linspace(0, 3*T, 3*100*T)
     states = []
 
-    with open('../data/multi_flat_space_traj2.pkl', 'rb') as file:
+    with open(qs_path+'/data/multi_flat_space_traj2.pkl', 'rb') as file:
         correct = pickle.load(file)
 
     for idx in range(0, len(times)):

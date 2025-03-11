@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pickle
 
-sys.path.append('../')
+import os
+qs_path = os.path.dirname(os.path.abspath(__file__))+'/..'
+sys.path.append(qs_path)
 
 from plot_states import plot
 from check_states import check_states
@@ -40,7 +42,7 @@ def test1_flat_space_trajectory_get_ref():
     times = np.linspace(0, T, 100*T)
     states = []
 
-    with open('../data/flat_space_traj1.pkl', 'rb') as file:
+    with open(qs_path+'/data/flat_space_traj1.pkl', 'rb') as file:
         correct = pickle.load(file)
 
 
@@ -72,7 +74,7 @@ def test2_flat_space_trajectory_get_ref():
     times = np.linspace(0, T, 100*T)
     states = []
 
-    with open('../data/flat_space_traj2.pkl', 'rb') as file:
+    with open(qs_path+'/data/flat_space_traj2.pkl', 'rb') as file:
         correct = pickle.load(file)
 
     for idx in range(0, len(times)):
