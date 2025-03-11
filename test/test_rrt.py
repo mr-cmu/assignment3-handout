@@ -9,7 +9,9 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from bresenham import bresenham
 
-sys.path.append('../')
+import os
+qs_path = os.path.dirname(os.path.abspath(__file__))+'/..'
+sys.path.append(qs_path)
 
 from quadrotor_simulator_py.quadrotor_control.state import State
 from quadrotor_simulator_py.utils import Rot3
@@ -19,7 +21,7 @@ from quadrotor_simulator_py.quadrotor_planning.rrt import RRT
 from quadrotor_simulator_py.quadrotor_planning.collision_checker import CollisionChecker
 
 def run_rrt_test(start, end, plot=True):
-    grid = mpimg.imread('../data/map.png')
+    grid = mpimg.imread(qs_path+'/data/map.png')
     rrt = RRT(start, end, grid)
     collision_checker = CollisionChecker(grid)
     end_node = rrt.run()

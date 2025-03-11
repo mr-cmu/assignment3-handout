@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 
 from quadrotor_simulator_py.quadrotor_control.state import State
 
+import os
+qs_path = os.path.dirname(os.path.abspath(__file__))+'/..'
+sys.path.append(qs_path)
+
 def plot(times, states, correct_states):
     labels = ['x', 'y', 'z']
 

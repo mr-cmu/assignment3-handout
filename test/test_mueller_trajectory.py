@@ -2,7 +2,9 @@ import sys
 import numpy as np
 from sklearn.metrics import mean_squared_error
 
-sys.path.append('../')
+import os
+qs_path = os.path.dirname(os.path.abspath(__file__))+'/..'
+sys.path.append(qs_path)
 
 from quadrotor_simulator_py.quadrotor_planning import MuellerTrajectory
 
