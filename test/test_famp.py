@@ -14,6 +14,7 @@ sys.path.append(qs_path)
 from check_states import check_states
 from quadrotor_simulator_py.quadrotor_control.state import State
 from quadrotor_simulator_py.utils import Rot3
+from quadrotor_simulator_py.utils.pose import Pose
 from quadrotor_simulator_py.quadrotor_model import QuadrotorModel
 from quadrotor_simulator_py.utils.quaternion import Quaternion
 from quadrotor_simulator_py.quadrotor_planning.forwardarctrajectory import ForwardArcTrajectory
@@ -161,7 +162,63 @@ def test_forwardarcprimitives():
     else:
         print('Forward arc motion primitives failure')
 
+def test_coeffs_bodyf2worldf():
+    ''' Tis is an optional test function you can call within the __init__ funtion in forwardarctrajectory.py
+    to convert coefficients from body frame to world frame '''
+    coeffs_body_frame = np.array([
+    [0.00000000e+00, 1.00000000e+00, -3.86738335e-14, -2.84217094e-14,
+     -9.27967183e-15, -2.26559351e-01, 1.89474081e-01, -5.91032049e-02,
+      6.64825537e-03],
+    [0.00000000e+00, 8.88178420e-16, 1.07145339e-14, -8.41451632e-30,
+     -1.00952294e-16, 4.40210510e-01, -4.34271402e-01, 1.52471142e-01,
+     -1.87836971e-02],
+    [0.00000000e+00, 0.00000000e+00, 2.01320442e-15, 0.00000000e+00,
+     -2.96059473e-17, 8.75000000e-02, -8.75000000e-02, 3.12500000e-02,
+     -3.90625000e-03],
+    [0.00000000e+00, 8.88178420e-16, 1.00660221e-14, 0.00000000e+00,
+     -1.48029737e-16, 4.37500000e-01, -4.37500000e-01, 1.56250000e-01,
+     -1.95312500e-02]
+    ])
+
+    coeffs_world_frame = np.array([
+        [1.00000000e+00, 1.00000000e+00, -3.86738335e-14, -2.84217094e-14,
+        -9.27967183e-15, -2.26559351e-01, 1.89474081e-01, -5.91032049e-02,
+          6.64825537e-03],
+        [1.58603289e-15, 1.77635684e-15, 1.07145339e-14, -3.36580653e-29,
+        -1.00952294e-16, 4.40210510e-01, -4.34271402e-01, 1.52471142e-01,
+        -1.87836971e-02],
+        [0.00000000e+00, 0.00000000e+00, 2.01320442e-15, 0.00000000e+00,
+        -2.96059473e-17, 8.75000000e-02, -8.75000000e-02, 3.12500000e-02,
+        -3.90625000e-03],
+        [8.88178420e-16, 8.88178420e-16, 1.00660221e-14, 0.00000000e+00,
+        -1.48029737e-16, 4.37500000e-01, -4.37500000e-01, 1.56250000e-01,
+        -1.95312500e-02]
+    ])
+    
+    curr_ref_position = np.array([1.00000000e+00, 1.58603289e-15, 0.00000000e+00])
+
+    curr_ref_rotation = np.array([
+        [1.0000000e+00, -8.8817842e-16,  0.0000000e+00],
+        [8.8817842e-16,  1.0000000e+00,  0.0000000e+00],
+        [-0.0000000e+00,  0.0000000e+00,  1.0000000e+00]
+    ])
+
+    Twb0 = Pose()
+    Twb0.set_translation(curr_ref_position.flatten())
+    Twb0.set_rotation(curr_ref_rotation)
+
+    curr_ref = State()
+    cmd = np.zeros((3,1))
+    T = 2
+    famp = ForwardArcTrajectory(curr_ref, cmd, T)
+    cal_coeffs_world_frame = famp.coeffs_bodyf2worldf(coeffs_body_frame, Twb0)
+    if(np.max(abs((coeffs_world_frame - cal_coeffs_world_frame))) < 1e-01):
+        print("test_coeffs_bodyf2worldf passed! (OPTIONAL TEST)")
+    else: 
+        print("test_coeffs_bodyf2worldf failed! (OPTIONAL TEST)")
+
 test_get_coefficients()
 test_integrate_coefficients()
 test_calculate_coefficients_from_constraints()
+test_coeffs_bodyf2worldf()
 test_forwardarcprimitives()

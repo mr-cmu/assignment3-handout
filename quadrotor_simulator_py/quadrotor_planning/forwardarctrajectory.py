@@ -35,6 +35,20 @@ class ForwardArcTrajectory:
         self.coeffs = coeffs_world_frame
         self.initialized = True
 
+    def coeffs_bodyf2worldf(self, coeffs, Twb0):
+        '''This is an optional function you can call within the __init__ funtion
+        to convert coefficients from body frame to world frame.
+        Args:
+            coeffs: 4x9 numpy array of coefficients in body frame
+            Twb0: Pose() object representing the initial pose of the quadrotor
+        Output:
+            coeffs_world_frame: 4x9 numpy array of coefficients in world frame
+        '''
+        coeffs_world_frame = np.zeros((4,9))
+        # TO-DO : Apply the world frame rotation and translation
+        
+        return coeffs_world_frame
+    
     def integrate_coefficients(self, cin):
         """ This function is an optional helper function you can call within 
             the __init__ function. It integrates the coefficients passed.
