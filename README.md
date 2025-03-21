@@ -159,7 +159,7 @@ _pickle.UnpicklingError: invalid load key, 'v'
 ```
 
 the issue is likely caused because you don't have `git lfs` installed
-or it hasn't pulled the file to your machine. To fix it, you can
+or it hasn't pulled the file to your machine. To install **Git LFS** follow [this](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage), then you can
 run the following:
 
 ```
